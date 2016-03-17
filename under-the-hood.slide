@@ -1,0 +1,106 @@
+Under The Hood, Part 1: Data Representation in Go
+1st Floripa Gophers
+17 Mar 2016
+Tags: floripa,gophers
+
+Paulo Pizarro
+Gopher at Neoway
+paulo.pizarro@neoway.com.br
+@pjpizarro
+
+* Notes
+
+The slides are available on [[https://github.com/NeowayLabs/presentations]]
+
+.image images/event_447209215.jpeg
+
+* Agenda
+
+- Data Representation in Go
+- Basic Types and arrays
+- Structs and pointers
+- String and slices
+- Dynamic allocation with "new" and "make"
+- Maps
+- Implementation of interface values
+
+* Data Representation in Go
+
+* Data Representation in Go
+
+- Good programmers know what the compiler does and how it affects the execution.
+
+- A good starting is to understand the data structures Go uses to represent data.
+
+- So we can get an intuition about which operations are expensive and which are not.
+
+* Basic Types and arrays
+
+* 32-bit Memory Layout of basic types
+
+.image images/basic-types.png
+
+* Example basic type
+
+.play example-basic-types.go
+
+* Structs and pointers
+
+* Memory Layout of structs
+
+.image images/struct.png
+
+* Memory Layout of composite structs
+
+.image images/composite-structs.png
+
+* Example structs
+
+.play example-structs.go
+
+* String and slices
+
+* Memory Layout of a string
+
+.image images/string.png
+
+* Slicing an array of integers
+
+.image images/slicing-array.png
+
+* Example structs
+
+.play example-slicing.go
+.link http://play.golang.org play
+
+* Dynamic allocation with "new" and "make"
+
+* Dynamic allocation with "new"
+
+.image images/allocation-new.png
+
+* Dynamic allocation with "make"
+
+.image images/allocation-make.png
+
+* Maps
+
+* TODO
+
+* Implementation of interface values
+
+* Interface representation
+
+.caption The gray pointers are not visible to the Go program but to the runtime system.
+
+.image images/interface.png
+
+* References
+
+- [[https://www.google.com.br/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0ahUKEwjwsOjZ2L7LAhVGUJAKHbJaD2UQFggcMAA&url=http%3A%2F%2Fdoc.cat-v.org%2Fprogramming%2Fgo%2Fpapers%2FPaper__aigner_baumgartner.pdf&usg=AFQjCNErtX_dvtvAcKsVuF0UL01mcVMxzQ&bvm=bv.116636494,d.Y2I&cad=rja][Google Go! A look behind the scenes]]
+- [[http://blog.golang.org/strings][Strings, bytes, runes and characters in Go]]
+- [[http://blog.golang.org/slices][Arrays, slices (and strings): The mechanics of 'append']]
+- [[http://blog.golang.org/go-slices-usage-and-internals][Go Slices: usage and internals]]
+- [[http://research.swtch.com/godata][Go Data Structures]]
+- [[http://www.goinggo.net/2013/12/macro-view-of-map-internals-in-go.html][Macro View of Map Internals In Go]]
+
