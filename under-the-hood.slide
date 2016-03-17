@@ -8,9 +8,12 @@ Gopher at Neoway
 paulo.pizarro@neoway.com.br
 @pjpizarro
 
+#* Neoway
+#.video videos/valhalla.3gp video/mp4 400 600
+
 * Notes
 
-The slides are available on [[https://github.com/NeowayLabs/presentations]]
+The slides are available on [[https://github.com/ppizarro/1st-floripa-gophers-under-the-hood]]
 
 .image images/event_447209215.jpeg
 
@@ -38,7 +41,7 @@ The slides are available on [[https://github.com/NeowayLabs/presentations]]
 
 * 32-bit Memory Layout of basic types
 
-.image images/basic-types.png
+.image images/basic-types2.png
 
 * Example basic type
 
@@ -48,11 +51,11 @@ The slides are available on [[https://github.com/NeowayLabs/presentations]]
 
 * Memory Layout of structs
 
-.image images/struct.png
+.image images/struct2.png
 
 * Memory Layout of composite structs
 
-.image images/composite-structs.png
+.image images/composite-structs2.png
 
 * Example structs
 
@@ -62,11 +65,11 @@ The slides are available on [[https://github.com/NeowayLabs/presentations]]
 
 * Memory Layout of a string
 
-.image images/string.png
+.image images/string2.png
 
 * Slicing an array of integers
 
-.image images/slicing-array.png
+.image images/slicing-array2.png
 
 * Example structs
 
@@ -77,23 +80,37 @@ The slides are available on [[https://github.com/NeowayLabs/presentations]]
 
 * Dynamic allocation with "new"
 
-.image images/allocation-new.png
+.image images/allocation-new2.png
 
 * Dynamic allocation with "make"
 
-.image images/allocation-make.png
+.image images/allocation-make2.png
 
 * Maps
 
-* TODO
+.code maps.go
 
 * Implementation of interface values
+
+* Example Interface
+
+.code interface.go
+
+Languages that support dynamic binding typically fall into one of two categories:
+
+- statically prepare method-call tables, which occurs in C++ and Java
+- do a method lookup for each call like the Smalltalk family of languages does
+
+Go is somewhere in between. It has method tables like C++ but these are computed at runtime
 
 * Interface representation
 
 .caption The gray pointers are not visible to the Go program but to the runtime system.
 
-.image images/interface.png
+.image images/interface2.png
+
+To call s.String() the compiler generates the following code (C-equivalent):
+s.tab->fun[0](s.data), i.e. it calls the right function pointer from the interface table.
 
 * References
 
