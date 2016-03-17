@@ -8,8 +8,8 @@ Gopher at Neoway
 paulo.pizarro@neoway.com.br
 @pjpizarro
 
-#* Neoway
-#.video videos/valhalla.3gp video/mp4 400 600
+* Neoway
+.video videos/valhalla.3gp video/mp4 400 600
 
 * Notes
 
@@ -43,6 +43,10 @@ The slides are available on [[https://github.com/ppizarro/1st-floripa-gophers-un
 
 .image images/basic-types2.png
 
+- i implicit 32 bit and j = explicit 32 bit
+- explicit sizes like int8 or int64
+- 64 bit machines only pointers are 64 bit long while int are 32 bit
+
 * Example basic type
 
 .play example-basic-types.go
@@ -52,6 +56,11 @@ The slides are available on [[https://github.com/ppizarro/1st-floripa-gophers-un
 * Memory Layout of structs
 
 .image images/struct2.png
+
+- Go lets decide what is a pointer and what is not
+- Composite literals are often used in Go
+- The fields are laid out continuously in memory
+- No pointer arithmetic
 
 * Memory Layout of composite structs
 
@@ -66,10 +75,20 @@ The slides are available on [[https://github.com/ppizarro/1st-floripa-gophers-un
 * Memory Layout of a string
 
 .image images/string2.png
+.caption The gray pointers are not visible to the Go program but to the runtime system.
+
+- Strings are Immutable
+- Multiple strings to share the same underlying data
 
 * Slicing an array of integers
 
 .image images/slicing-array2.png
+.caption The gray pointers are not visible to the Go program but to the runtime system.
+
+- Slice - 3 words (pointer to data, len, cap)
+- Advantage slicing - create a new slice and does not copy underlying data
+- Slice parameters - as efficient as passing a pointer and length par in C
+- Like Java well known draw back keeping a small slice of a huge array
 
 * Example structs
 
@@ -82,13 +101,27 @@ The slides are available on [[https://github.com/ppizarro/1st-floripa-gophers-un
 
 .image images/allocation-new2.png
 
+- new(T) returns *T
+- creates data structures with zeroed memory
+
 * Dynamic allocation with "make"
 
 .image images/allocation-make2.png
 
+- make(T, args) return an ordinary T
+- initializes the slice with the underlying data structure
+- make used for channels, slices anda maps
+
 * Maps
 
+* Example Maps
+
 .code maps.go
+
+- maps are built-in data structures
+- decision for built-in maps was made because of the benefit of syntactical
+- maps are a reference type
+- structs, arrays and slices cannot used as key
 
 * Implementation of interface values
 
@@ -105,12 +138,12 @@ Go is somewhere in between. It has method tables like C++ but these are computed
 
 * Interface representation
 
+.image images/interface2.png
 .caption The gray pointers are not visible to the Go program but to the runtime system.
 
-.image images/interface2.png
+To call s.String() the compiler generates s.tab->fun[0](s.data)
 
-To call s.String() the compiler generates the following code (C-equivalent):
-s.tab->fun[0](s.data), i.e. it calls the right function pointer from the interface table.
+The implicit implementation of interfaces in Go is one of the strongest features for refactories
 
 * References
 
